@@ -1,0 +1,292 @@
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var regeneratorRuntime = require("regenerator-runtime");
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var gen = fn.apply(this, arguments);return new Promise(function (resolve, reject) {
+      function step(key, arg) {
+        try {
+          var info = gen[key](arg);var value = info.value;
+        } catch (error) {
+          reject(error);return;
+        }if (info.done) {
+          resolve(value);
+        } else {
+          return Promise.resolve(value).then(function (value) {
+            step("next", value);
+          }, function (err) {
+            step("throw", err);
+          });
+        }
+      }return step("next");
+    });
+  };
+}
+
+var utils = require("jest-matcher-utils");var matchers = require('./matchers');var spyMatchers = require('./spyMatchers');var toThrowMatchers = require('./toThrowMatchers');var _require = require('./jasmine-utils');var equals = _require.equals;var _require2 = require('./asymmetric-matchers');var any = _require2.any,
+    anything = _require2.anything,
+    arrayContaining = _require2.arrayContaining,
+    objectContaining = _require2.objectContaining,
+    stringContaining = _require2.stringContaining,
+    stringMatching = _require2.stringMatching;
+
+var GLOBAL_STATE = (typeof Symbol === "function" ? Symbol.for : "@@for")('$$jest-matchers-object');
+
+var JestAssertionError = function (_Error) {
+  _inherits(JestAssertionError, _Error);
+
+  function JestAssertionError() {
+    _classCallCheck(this, JestAssertionError);
+
+    return _possibleConstructorReturn(this, (JestAssertionError.__proto__ || Object.getPrototypeOf(JestAssertionError)).apply(this, arguments));
+  }
+
+  return JestAssertionError;
+}(Error);
+
+var isPromise = function isPromise(obj) {
+  return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+};
+
+if (!global[GLOBAL_STATE]) {
+  Object.defineProperty(global, GLOBAL_STATE, {
+    value: {
+      matchers: Object.create(null),
+      state: {
+        assertionCalls: 0,
+        expectedAssertionsNumber: null,
+        isExpectingAssertions: false,
+        suppressedErrors: [] } } });
+}
+
+var expect = function expect(actual) {
+  var allMatchers = global[GLOBAL_STATE].matchers;
+  var expectation = {
+    not: {},
+    rejects: { not: {} },
+    resolves: { not: {} } };
+
+  Object.keys(allMatchers).forEach(function (name) {
+    expectation[name] = makeThrowingMatcher(allMatchers[name], false, actual);
+    expectation.not[name] = makeThrowingMatcher(allMatchers[name], true, actual);
+
+    expectation.resolves[name] = makeResolveMatcher(name, allMatchers[name], false, actual);
+
+    expectation.resolves.not[name] = makeResolveMatcher(name, allMatchers[name], true, actual);
+
+    expectation.rejects[name] = makeRejectMatcher(name, allMatchers[name], false, actual);
+
+    expectation.rejects.not[name] = makeRejectMatcher(name, allMatchers[name], true, actual);
+  });
+
+  return expectation;
+};
+
+var getMessage = function getMessage(message) {
+  if (typeof message === 'function') {
+    message = message();
+  }
+
+  if (!message) {
+    message = utils.RECEIVED_COLOR('No message was specified for this matcher.');
+  }
+  return message;
+};
+
+var makeResolveMatcher = function makeResolveMatcher(matcherName, matcher, isNot, actual) {
+  return _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+    var _len,
+        args,
+        _key,
+        matcherStatement,
+        result,
+        _args = arguments;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            for (_len = _args.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+              args[_key] = _args[_key];
+            }
+            matcherStatement = ".resolves." + (isNot ? 'not.' : '') + matcherName;
+
+            if (isPromise(actual)) {
+              _context.next = 4;
+              break;
+            }
+
+            throw new JestAssertionError(utils.matcherHint(matcherStatement, 'received', '') + '\n\n' + (utils.RECEIVED_COLOR('received') + " value must be a Promise.\n") + utils.printWithType('Received', actual, utils.printReceived));
+
+          case 4:
+            result = void 0;
+            _context.prev = 5;
+            _context.next = 8;
+            return actual;
+
+          case 8:
+            result = _context.sent;
+            _context.next = 14;
+            break;
+
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](5);
+            throw new JestAssertionError(utils.matcherHint(matcherStatement, 'received', '') + '\n\n' + ("Expected " + utils.RECEIVED_COLOR('received') + " Promise to resolve, ") + 'instead it rejected to value\n' + ("  " + utils.printReceived(_context.t0)));
+
+          case 14:
+            return _context.abrupt("return", makeThrowingMatcher(matcher, isNot, result).apply(null, args));
+
+          case 15:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this, [[5, 11]]);
+  }));
+};
+
+var makeRejectMatcher = function makeRejectMatcher(matcherName, matcher, isNot, actual) {
+  return _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+    var _len2,
+        args,
+        _key2,
+        matcherStatement,
+        result,
+        _args2 = arguments;
+
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            for (_len2 = _args2.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+              args[_key2] = _args2[_key2];
+            }
+            matcherStatement = ".rejects." + (isNot ? 'not.' : '') + matcherName;
+
+            if (isPromise(actual)) {
+              _context2.next = 4;
+              break;
+            }
+
+            throw new JestAssertionError(utils.matcherHint(matcherStatement, 'received', '') + '\n\n' + (utils.RECEIVED_COLOR('received') + " value must be a Promise.\n") + utils.printWithType('Received', actual, utils.printReceived));
+
+          case 4:
+            result = void 0;
+            _context2.prev = 5;
+            _context2.next = 8;
+            return actual;
+
+          case 8:
+            result = _context2.sent;
+            _context2.next = 14;
+            break;
+
+          case 11:
+            _context2.prev = 11;
+            _context2.t0 = _context2["catch"](5);
+            return _context2.abrupt("return", makeThrowingMatcher(matcher, isNot, _context2.t0).apply(null, args));
+
+          case 14:
+            throw new JestAssertionError(utils.matcherHint(matcherStatement, 'received', '') + '\n\n' + ("Expected " + utils.RECEIVED_COLOR('received') + " Promise to reject, ") + 'instead it resolved to value\n' + ("  " + utils.printReceived(result)));
+
+          case 15:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, this, [[5, 11]]);
+  }));
+};
+
+var makeThrowingMatcher = function makeThrowingMatcher(matcher, isNot, actual) {
+  return function throwingMatcher() {
+    var throws = true;
+    var matcherContext = _extends({ dontThrow: function dontThrow() {
+        return throws = false;
+      } }, global[GLOBAL_STATE].state, {
+      equals: equals,
+      isNot: isNot,
+      utils: utils });
+
+    var result = void 0;
+
+    try {
+      for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
+      }
+      result = matcher.apply(matcherContext, [actual].concat(args));
+    } catch (error) {
+      Error.captureStackTrace(error, throwingMatcher);
+      throw error;
+    }
+
+    _validateResult(result);
+
+    global[GLOBAL_STATE].state.assertionCalls++;
+
+    if (result.pass && isNot || !result.pass && !isNot) {
+      var message = getMessage(result.message);
+      var error = new JestAssertionError(message);
+
+      error.matcherResult = result;
+
+      Error.captureStackTrace(error, throwingMatcher);
+
+      if (throws) {
+        throw error;
+      } else {
+        global[GLOBAL_STATE].state.suppressedErrors.push(error);
+      }
+    }
+  };
+};
+
+expect.extend = function (matchers) {
+  _extends(global[GLOBAL_STATE].matchers, matchers);
+};
+
+expect.anything = anything;
+expect.any = any;
+expect.objectContaining = objectContaining;
+expect.arrayContaining = arrayContaining;
+expect.stringContaining = stringContaining;
+expect.stringMatching = stringMatching;
+
+var _validateResult = function _validateResult(result) {
+  if (typeof result !== 'object' || typeof result.pass !== 'boolean' || result.message && typeof result.message !== 'string' && typeof result.message !== 'function') {
+    throw new Error('Unexpected return from a matcher function.\n' + 'Matcher functions should ' + 'return an object in the following format:\n' + '  {message?: string | function, pass: boolean}\n' + ("'" + utils.stringify(result) + "' was returned"));
+  }
+};
+
+expect.extend(matchers);
+expect.extend(spyMatchers);
+expect.extend(toThrowMatchers);
+
+expect.addSnapshotSerializer = function () {
+  return void 0;
+};
+expect.assertions = function (expected) {
+  global[GLOBAL_STATE].state.expectedAssertionsNumber = expected;
+};
+expect.hasAssertions = function (expected) {
+  utils.ensureNoExpected(expected, '.hasAssertions');
+  global[GLOBAL_STATE].state.isExpectingAssertions = true;
+};
+expect.setState = function (state) {
+  _extends(global[GLOBAL_STATE].state, state);
+};
+expect.getState = function () {
+  return global[GLOBAL_STATE].state;
+};
+
+module.exports = expect;

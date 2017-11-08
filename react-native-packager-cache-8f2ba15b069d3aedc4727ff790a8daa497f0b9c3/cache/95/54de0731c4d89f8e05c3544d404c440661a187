@@ -1,0 +1,8 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DEVICE_WIDTH = undefined;
+
+var _reactNative = require('react-native');
+
+var DEVICE_WIDTH = exports.DEVICE_WIDTH = _reactNative.Dimensions.get('screen').width;

@@ -1,0 +1,303 @@
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var _require = require('./jasmine-utils');var equals = _require.equals,
+    fnNameFor = _require.fnNameFor,
+    hasProperty = _require.hasProperty,
+    isA = _require.isA,
+    isUndefined = _require.isUndefined;
+
+var AsymmetricMatcher = function AsymmetricMatcher() {
+  _classCallCheck(this, AsymmetricMatcher);
+
+  this.$$typeof = (typeof Symbol === 'function' ? Symbol.for : '@@for')('jest.asymmetricMatcher');
+};
+
+var Any = function (_AsymmetricMatcher) {
+  _inherits(Any, _AsymmetricMatcher);
+
+  function Any(sample) {
+    _classCallCheck(this, Any);
+
+    var _this = _possibleConstructorReturn(this, (Any.__proto__ || Object.getPrototypeOf(Any)).call(this));
+
+    if (typeof sample === 'undefined') {
+      throw new TypeError('any() expects to be passed a constructor function. ' + 'Please pass one or use anything() to match any object.');
+    }
+    _this.sample = sample;
+    return _this;
+  }
+
+  _createClass(Any, [{
+    key: 'asymmetricMatch',
+    value: function asymmetricMatch(other) {
+      if (this.sample == String) {
+        return typeof other == 'string' || other instanceof String;
+      }
+
+      if (this.sample == Number) {
+        return typeof other == 'number' || other instanceof Number;
+      }
+
+      if (this.sample == Function) {
+        return typeof other == 'function' || other instanceof Function;
+      }
+
+      if (this.sample == Object) {
+        return typeof other == 'object';
+      }
+
+      if (this.sample == Boolean) {
+        return typeof other == 'boolean';
+      }
+
+      return other instanceof this.sample;
+    }
+  }, {
+    key: 'toString',
+    value: function toString() {
+      return 'Any';
+    }
+  }, {
+    key: 'getExpectedType',
+    value: function getExpectedType() {
+      if (this.sample == String) {
+        return 'string';
+      }
+
+      if (this.sample == Number) {
+        return 'number';
+      }
+
+      if (this.sample == Function) {
+        return 'function';
+      }
+
+      if (this.sample == Object) {
+        return 'object';
+      }
+
+      if (this.sample == Boolean) {
+        return 'boolean';
+      }
+
+      return fnNameFor(this.sample);
+    }
+  }, {
+    key: 'toAsymmetricMatcher',
+    value: function toAsymmetricMatcher() {
+      return 'Any<' + fnNameFor(this.sample) + '>';
+    }
+  }]);
+
+  return Any;
+}(AsymmetricMatcher);
+
+var Anything = function (_AsymmetricMatcher2) {
+  _inherits(Anything, _AsymmetricMatcher2);
+
+  function Anything() {
+    _classCallCheck(this, Anything);
+
+    return _possibleConstructorReturn(this, (Anything.__proto__ || Object.getPrototypeOf(Anything)).apply(this, arguments));
+  }
+
+  _createClass(Anything, [{
+    key: 'asymmetricMatch',
+    value: function asymmetricMatch(other) {
+      return !isUndefined(other) && other !== null;
+    }
+  }, {
+    key: 'toString',
+    value: function toString() {
+      return 'Anything';
+    }
+  }, {
+    key: 'toAsymmetricMatcher',
+    value: function toAsymmetricMatcher() {
+      return 'Anything';
+    }
+  }]);
+
+  return Anything;
+}(AsymmetricMatcher);
+
+var ArrayContaining = function (_AsymmetricMatcher3) {
+  _inherits(ArrayContaining, _AsymmetricMatcher3);
+
+  function ArrayContaining(sample) {
+    _classCallCheck(this, ArrayContaining);
+
+    var _this3 = _possibleConstructorReturn(this, (ArrayContaining.__proto__ || Object.getPrototypeOf(ArrayContaining)).call(this));
+
+    _this3.sample = sample;
+    return _this3;
+  }
+
+  _createClass(ArrayContaining, [{
+    key: 'asymmetricMatch',
+    value: function asymmetricMatch(other) {
+      if (!Array.isArray(this.sample)) {
+        throw new Error("You must provide an array to ArrayContaining, not '" + typeof this.sample + "'.");
+      }
+
+      return this.sample.length === 0 || Array.isArray(other) && this.sample.every(function (item) {
+        return other.some(function (another) {
+          return equals(item, another);
+        });
+      });
+    }
+  }, {
+    key: 'toString',
+    value: function toString() {
+      return 'ArrayContaining';
+    }
+  }, {
+    key: 'getExpectedType',
+    value: function getExpectedType() {
+      return 'array';
+    }
+  }]);
+
+  return ArrayContaining;
+}(AsymmetricMatcher);
+
+var ObjectContaining = function (_AsymmetricMatcher4) {
+  _inherits(ObjectContaining, _AsymmetricMatcher4);
+
+  function ObjectContaining(sample) {
+    _classCallCheck(this, ObjectContaining);
+
+    var _this4 = _possibleConstructorReturn(this, (ObjectContaining.__proto__ || Object.getPrototypeOf(ObjectContaining)).call(this));
+
+    _this4.sample = sample;
+    return _this4;
+  }
+
+  _createClass(ObjectContaining, [{
+    key: 'asymmetricMatch',
+    value: function asymmetricMatch(other) {
+      if (typeof this.sample !== 'object') {
+        throw new Error("You must provide an object to ObjectContaining, not '" + typeof this.sample + "'.");
+      }
+
+      for (var property in this.sample) {
+        if (!hasProperty(other, property) || !equals(this.sample[property], other[property])) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  }, {
+    key: 'toString',
+    value: function toString() {
+      return 'ObjectContaining';
+    }
+  }, {
+    key: 'getExpectedType',
+    value: function getExpectedType() {
+      return 'object';
+    }
+  }]);
+
+  return ObjectContaining;
+}(AsymmetricMatcher);
+
+var StringContaining = function (_AsymmetricMatcher5) {
+  _inherits(StringContaining, _AsymmetricMatcher5);
+
+  function StringContaining(sample) {
+    _classCallCheck(this, StringContaining);
+
+    var _this5 = _possibleConstructorReturn(this, (StringContaining.__proto__ || Object.getPrototypeOf(StringContaining)).call(this));
+
+    if (!isA('String', sample)) {
+      throw new Error('Expected is not a string');
+    }
+    _this5.sample = sample;
+    return _this5;
+  }
+
+  _createClass(StringContaining, [{
+    key: 'asymmetricMatch',
+    value: function asymmetricMatch(other) {
+      return other.includes(this.sample);
+    }
+  }, {
+    key: 'toString',
+    value: function toString() {
+      return 'StringContaining';
+    }
+  }, {
+    key: 'getExpectedType',
+    value: function getExpectedType() {
+      return 'string';
+    }
+  }]);
+
+  return StringContaining;
+}(AsymmetricMatcher);
+
+var StringMatching = function (_AsymmetricMatcher6) {
+  _inherits(StringMatching, _AsymmetricMatcher6);
+
+  function StringMatching(sample) {
+    _classCallCheck(this, StringMatching);
+
+    var _this6 = _possibleConstructorReturn(this, (StringMatching.__proto__ || Object.getPrototypeOf(StringMatching)).call(this));
+
+    if (!isA('String', sample) && !isA('RegExp', sample)) {
+      throw new Error('Expected is not a String or a RegExp');
+    }
+
+    _this6.sample = new RegExp(sample);
+    return _this6;
+  }
+
+  _createClass(StringMatching, [{
+    key: 'asymmetricMatch',
+    value: function asymmetricMatch(other) {
+      return this.sample.test(other);
+    }
+  }, {
+    key: 'toString',
+    value: function toString() {
+      return 'StringMatching';
+    }
+  }, {
+    key: 'getExpectedType',
+    value: function getExpectedType() {
+      return 'string';
+    }
+  }]);
+
+  return StringMatching;
+}(AsymmetricMatcher);
+
+module.exports = {
+  any: function any(expectedObject) {
+    return new Any(expectedObject);
+  },
+  anything: function anything() {
+    return new Anything();
+  },
+  arrayContaining: function arrayContaining(sample) {
+    return new ArrayContaining(sample);
+  },
+  objectContaining: function objectContaining(sample) {
+    return new ObjectContaining(sample);
+  },
+  stringContaining: function stringContaining(expected) {
+    return new StringContaining(expected);
+  },
+  stringMatching: function stringMatching(expected) {
+    return new StringMatching(expected);
+  } };
