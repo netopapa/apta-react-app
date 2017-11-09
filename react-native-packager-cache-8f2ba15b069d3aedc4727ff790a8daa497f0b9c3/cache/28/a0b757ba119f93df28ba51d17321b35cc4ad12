@@ -53,10 +53,10 @@ function _wrapComponent(id) {
 var Header = exports.Header = _wrapComponent('Header')(function (_React$Component) {
   _inherits(Header, _React$Component);
 
-  function Header() {
+  function Header(props) {
     _classCallCheck(this, Header);
 
-    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this, props));
   }
 
   _createClass(Header, [{
@@ -66,17 +66,25 @@ var Header = exports.Header = _wrapComponent('Header')(function (_React$Componen
         _reactNative.View,
         { style: styles.header, __source: {
             fileName: _jsxFileName,
-            lineNumber: 10
+            lineNumber: 14
           }
         },
-        _react3.default.createElement(_FontAwesome2.default, { name: 'list', size: 30, color: '#000', __source: {
-            fileName: _jsxFileName,
-            lineNumber: 11
-          }
-        }),
+        _react3.default.createElement(
+          _reactNative.TouchableOpacity,
+          { onPress: this.props.toggleMenu, style: styles.button, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 15
+            }
+          },
+          _react3.default.createElement(_FontAwesome2.default, { name: 'list', size: 30, color: '#000', __source: {
+              fileName: _jsxFileName,
+              lineNumber: 16
+            }
+          })
+        ),
         _react3.default.createElement(_reactNative.Image, { source: require('../../assets/logo/logo.png'), style: styles.logo, __source: {
             fileName: _jsxFileName,
-            lineNumber: 12
+            lineNumber: 18
           }
         })
       );

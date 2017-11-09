@@ -1,0 +1,20 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getAllCursos = getAllCursos;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _constants = require('../config/constants');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getAllCursos() {
+    fetch('http://aptacet.com.br/wp-content/themes/apta/php/server.php').then(function (resp) {
+        return resp.json();
+    }).then(function (resp) {
+        return resp;
+    });
+}

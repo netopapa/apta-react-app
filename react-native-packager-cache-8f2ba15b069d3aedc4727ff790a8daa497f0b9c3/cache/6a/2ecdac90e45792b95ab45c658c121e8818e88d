@@ -84,8 +84,7 @@ var Home = exports.Home = _wrapComponent('Home')(function (_React$Component) {
         value: function render() {
             return _react3.default.createElement(
                 _reactNative.View,
-                {
-                    __source: {
+                { style: styles.background, __source: {
                         fileName: _jsxFileName,
                         lineNumber: 26
                     }
@@ -130,5 +129,8 @@ var styles = _reactNative.StyleSheet.create({
     },
     black: {
         color: '#000'
+    },
+    background: {
+        backgroundColor: '#fff'
     }
 });

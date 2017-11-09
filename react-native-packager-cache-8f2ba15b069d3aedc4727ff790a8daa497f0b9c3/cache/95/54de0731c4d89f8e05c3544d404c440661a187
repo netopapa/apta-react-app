@@ -1,8 +1,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DEVICE_WIDTH = undefined;
+exports.URL_API = exports.URL_IMG = exports.DEVICE_HEIGHT = exports.DEVICE_WIDTH = undefined;
 
 var _reactNative = require('react-native');
 
 var DEVICE_WIDTH = exports.DEVICE_WIDTH = _reactNative.Dimensions.get('screen').width;
+var DEVICE_HEIGHT = exports.DEVICE_HEIGHT = _reactNative.Dimensions.get('screen').height;
+
+var URL_IMG = exports.URL_IMG = 'http://aptacet.com.br/wp-content/themes/apta/php/img/';
+
+var URL_API = exports.URL_API = 'http://aptacet.com.br/wp-content/themes/apta/php/server.php';

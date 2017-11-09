@@ -1,0 +1,246 @@
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/home/noobsaybot/Documentos/react-native-projects/apta/components/menu/Menu.js';
+exports.default = Menu;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactNative = require('react-native');
+
+var _constants = require('../../config/constants');
+
+var _FontAwesome = require('@expo/vector-icons/FontAwesome');
+
+var _FontAwesome2 = _interopRequireDefault(_FontAwesome);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var uri = 'https://pickaface.net/gallery/avatar/Opi51c74d0125fd4.png';
+
+var styles = _reactNative.StyleSheet.create({
+  menu: {
+    flex: 1,
+    width: _constants.DEVICE_WIDTH,
+    height: _constants.DEVICE_HEIGHT,
+    backgroundColor: '#000',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 25
+  },
+  avatarContainer: {
+    width: _constants.DEVICE_WIDTH * 0.57,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  avatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 24
+  },
+  name: {
+    fontWeight: '700',
+    fontSize: 20
+  },
+  white: {
+    color: '#fff'
+  },
+  item: {
+    width: _constants.DEVICE_WIDTH * 0.57,
+    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderTopWidth: 0.3,
+    borderColor: '#666'
+  },
+  lastItem: {
+    borderBottomWidth: 0.3
+  },
+  textItem: {
+    fontSize: 15,
+    marginLeft: 10
+  }
+});
+
+function Menu(_ref) {
+  var onItemSelected = _ref.onItemSelected;
+
+  return _react2.default.createElement(
+    _reactNative.ScrollView,
+    { scrollsToTop: false, style: styles.menu, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 63
+      }
+    },
+    _react2.default.createElement(
+      _reactNative.View,
+      { style: styles.avatarContainer, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 64
+        }
+      },
+      _react2.default.createElement(_reactNative.Image, {
+        style: styles.avatar,
+        source: { uri: uri },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65
+        }
+      }),
+      _react2.default.createElement(
+        _reactNative.Text,
+        { style: [styles.name, styles.white], __source: {
+            fileName: _jsxFileName,
+            lineNumber: 69
+          }
+        },
+        'Walter White'
+      )
+    ),
+    _react2.default.createElement(
+      _reactNative.View,
+      { style: styles.item, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 72
+        }
+      },
+      _react2.default.createElement(_FontAwesome2.default, { name: 'archive', size: 15, color: '#4edcba', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 73
+        }
+      }),
+      _react2.default.createElement(
+        _reactNative.Text,
+        {
+          onPress: function onPress() {
+            return onItemSelected('About');
+          },
+          style: [styles.white, styles.textItem],
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 74
+          }
+        },
+        'FEED DE CURSOS'
+      )
+    ),
+    _react2.default.createElement(
+      _reactNative.View,
+      { style: styles.item, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 82
+        }
+      },
+      _react2.default.createElement(_FontAwesome2.default, { name: 'flag', size: 15, color: '#4edcba', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 83
+        }
+      }),
+      _react2.default.createElement(
+        _reactNative.Text,
+        {
+          onPress: function onPress() {
+            return onItemSelected('About');
+          },
+          style: [styles.white, styles.textItem],
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 84
+          }
+        },
+        'MEUS CURSOS'
+      )
+    ),
+    _react2.default.createElement(
+      _reactNative.View,
+      { style: styles.item, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 92
+        }
+      },
+      _react2.default.createElement(_FontAwesome2.default, { name: 'phone', size: 15, color: '#4edcba', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 93
+        }
+      }),
+      _react2.default.createElement(
+        _reactNative.Text,
+        {
+          onPress: function onPress() {
+            return onItemSelected('About');
+          },
+          style: [styles.white, styles.textItem],
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 94
+          }
+        },
+        'CONTATO'
+      )
+    ),
+    _react2.default.createElement(
+      _reactNative.View,
+      { style: styles.item, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 102
+        }
+      },
+      _react2.default.createElement(_FontAwesome2.default, { name: 'industry', size: 15, color: '#4edcba', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 103
+        }
+      }),
+      _react2.default.createElement(
+        _reactNative.Text,
+        {
+          onPress: function onPress() {
+            return onItemSelected('About');
+          },
+          style: [styles.white, styles.textItem],
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 104
+          }
+        },
+        'SOBRE'
+      )
+    ),
+    _react2.default.createElement(
+      _reactNative.View,
+      { style: [styles.item, styles.lastItem], __source: {
+          fileName: _jsxFileName,
+          lineNumber: 112
+        }
+      },
+      _react2.default.createElement(_FontAwesome2.default, { name: 'arrow-left', size: 15, color: '#4edcba', __source: {
+          fileName: _jsxFileName,
+          lineNumber: 113
+        }
+      }),
+      _react2.default.createElement(
+        _reactNative.Text,
+        {
+          onPress: function onPress() {
+            return onItemSelected('About');
+          },
+          style: [styles.white, styles.textItem],
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 114
+          }
+        },
+        'SAIR'
+      )
+    )
+  );
+}
+
+Menu.propTypes = {
+  onItemSelected: _propTypes2.default.func.isRequired
+};

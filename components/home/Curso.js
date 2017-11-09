@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
-import { DEVICE_WIDTH } from '../../config/constants';
+import { DEVICE_WIDTH, URL_IMG } from '../../config/constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card } from 'nachos-ui';
@@ -19,7 +19,7 @@ export class Curso extends React.Component {
       <View style={styles.container} >
         <Card
             footerContent={this.state.curso.nome}
-            image={`http://aptacet.com.br/wp-content/themes/apta/php/img/${this.state.curso.foto}`}
+            image={URL_IMG + this.state.curso.foto}
         />
       </View>
     );

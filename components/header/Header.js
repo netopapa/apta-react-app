@@ -1,14 +1,20 @@
 import React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, Image, View, TouchableOpacity } from 'react-native';
 import { DEVICE_WIDTH } from '../../config/constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export class Header extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
   render() {
     return (
       <View style={styles.header}>
-        <Icon name="list" size={30} color="#000" />
+         <TouchableOpacity onPress={ this.props.toggleMenu } style={styles.button} >
+          <Icon name="list" size={30} color="#000" />
+        </TouchableOpacity>
         <Image source={require('../../assets/logo/logo.png')} style={styles.logo} />
       </View>
     );

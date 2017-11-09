@@ -16,14 +16,14 @@ export class Home extends React.Component {
   }
 
   componentDidMount(){
-      fetch('http://aptacet.com.br/wp-content/themes/apta/php/server.php')
-      .then(resp => resp.json())
-      .then(resp => this.setState({cursos: resp}))
+    fetch('http://aptacet.com.br/wp-content/themes/apta/php/server.php')
+    .then(resp => resp.json())
+    .then(resp => this.setState({cursos: resp}))    
   }
 
   render() {
     return (
-      <View>
+      <View style={styles.background} >
         <H3 align="center" style={styles.black} >CURSOS</H3>
         <FlatList
             keyExtractor = {curso => curso.ID}
@@ -44,5 +44,8 @@ const styles = StyleSheet.create({
     },
     black: {
         color: '#000'
+    },
+    background: {
+        backgroundColor: '#fff'
     }
 });

@@ -78,7 +78,7 @@ var Curso = exports.Curso = _wrapComponent('Curso')(function (_React$Component) 
         },
         _react3.default.createElement(_nachosUi.Card, {
           footerContent: this.state.curso.nome,
-          image: 'http://aptacet.com.br/wp-content/themes/apta/php/img/' + this.state.curso.foto,
+          image: _constants.URL_IMG + this.state.curso.foto,
           __source: {
             fileName: _jsxFileName,
             lineNumber: 20
