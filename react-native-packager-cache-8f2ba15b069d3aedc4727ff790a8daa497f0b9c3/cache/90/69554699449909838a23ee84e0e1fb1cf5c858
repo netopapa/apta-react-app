@@ -85,46 +85,124 @@ var Single = exports.Single = _wrapComponent('Single')(function (_React$Componen
             var curso = this.state.curso;
 
             var foto = _constants.URL_IMG + curso.foto;
-            console.debug(foto);
+            var dt_inicio = curso.dt_inicio.split('-').reverse().join('/');
+            var dt_fim = curso.dt_fim.split('-').reverse().join('/');
             return _react3.default.createElement(
-                _reactNative.View,
-                { style: { paddingTop: 15, paddingBottom: 15 }, __source: {
+                _reactNative.ScrollView,
+                { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 29
+                        lineNumber: 30
                     }
                 },
                 _react3.default.createElement(
                     _nachosUi.H3,
                     { align: 'center', style: styles.black, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 30
+                            lineNumber: 31
                         }
                     },
                     curso.nome
                 ),
                 _react3.default.createElement(_reactNative.Image, { source: { uri: foto }, style: styles.fotoCurso, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 31
+                        lineNumber: 33
                     }
                 }),
                 _react3.default.createElement(
-                    _nachosUi.H4,
-                    { style: styles.black, __source: {
+                    _reactNative.View,
+                    { style: styles.informacoes, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 33
+                            lineNumber: 35
                         }
                     },
-                    'Sobre o curso:'
-                ),
-                _react3.default.createElement(
-                    _reactNative.Text,
-                    {
-                        __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 34
-                        }
-                    },
-                    curso.obs
+                    _react3.default.createElement(
+                        _nachosUi.H4,
+                        { style: styles.black, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 36
+                            }
+                        },
+                        'DESCRI\xC7\xC3O'
+                    ),
+                    _react3.default.createElement(
+                        _reactNative.Text,
+                        {
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 37
+                            }
+                        },
+                        curso.obs
+                    ),
+                    _react3.default.createElement(
+                        _reactNative.View,
+                        { style: styles.datas, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 39
+                            }
+                        },
+                        _react3.default.createElement(
+                            _reactNative.View,
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 40
+                                }
+                            },
+                            _react3.default.createElement(
+                                _nachosUi.H4,
+                                { align: 'center', style: styles.black, __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 41
+                                    }
+                                },
+                                'INICIA'
+                            ),
+                            _react3.default.createElement(
+                                _reactNative.Text,
+                                {
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 42
+                                    }
+                                },
+                                dt_inicio
+                            )
+                        ),
+                        _react3.default.createElement(_reactNative.View, { style: styles.leftBorder, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 44
+                            }
+                        }),
+                        _react3.default.createElement(
+                            _reactNative.View,
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 45
+                                }
+                            },
+                            _react3.default.createElement(
+                                _nachosUi.H4,
+                                { align: 'center', style: styles.black, __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 46
+                                    }
+                                },
+                                'TERMINA'
+                            ),
+                            _react3.default.createElement(
+                                _reactNative.Text,
+                                {
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 47
+                                    }
+                                },
+                                dt_fim
+                            )
+                        )
+                    )
                 )
             );
         }
@@ -135,13 +213,23 @@ var Single = exports.Single = _wrapComponent('Single')(function (_React$Componen
 
 var styles = _reactNative.StyleSheet.create({
     container: {
-        padding: 10
+        minHeight: _constants.DEVICE_HEIGHT
     },
     black: {
         color: '#000'
     },
     fotoCurso: {
-        width: _constants.DEVIVE_WIDTH,
-        height: _constants.DEVIVE_WIDTH
+        width: _constants.DEVICE_WIDTH,
+        height: _constants.DEVICE_WIDTH / 1.8
+    },
+    informacoes: {
+        padding: 10
+    },
+    datas: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    leftBorder: {
+        borderRightWidth: 1
     }
 });
