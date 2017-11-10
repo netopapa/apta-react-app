@@ -1,8 +1,13 @@
 import React from 'react';
 import { URL_API } from '../config/constants';
 
-export function getAllCursos(){
-    fetch('http://aptacet.com.br/wp-content/themes/apta/php/server.php')
+export const getAllCursos = () => {
+    return fetch(URL_API)
     .then(resp => resp.json())
-    .then(resp => {return resp})
+    .then(json => {return  json[0]});
+}
+
+export function getCurso(id){
+    return fetch(`${URL_API}?id=${id}`)
+        .then(resp => resp.json())
 }

@@ -6,6 +6,8 @@ import { Curso } from './Curso';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card, H3 } from 'nachos-ui';
 
+//import { getAllCursos } from "../../services/CursosService";
+
 export class Home extends React.Component {
 
   constructor(){
@@ -18,12 +20,12 @@ export class Home extends React.Component {
   componentDidMount(){
     fetch('http://aptacet.com.br/wp-content/themes/apta/php/server.php')
     .then(resp => resp.json())
-    .then(resp => this.setState({cursos: resp}))    
+    .then(resp => this.setState({cursos: resp}))   
   }
 
   render() {
     return (
-      <View style={styles.background} >
+      <View>
         <H3 align="center" style={styles.black} >CURSOS</H3>
         <FlatList
             keyExtractor = {curso => curso.ID}
@@ -44,8 +46,5 @@ const styles = StyleSheet.create({
     },
     black: {
         color: '#000'
-    },
-    background: {
-        backgroundColor: '#fff'
     }
 });

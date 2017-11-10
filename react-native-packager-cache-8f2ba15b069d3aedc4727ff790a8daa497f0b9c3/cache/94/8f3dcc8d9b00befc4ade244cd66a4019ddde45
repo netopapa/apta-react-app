@@ -28,6 +28,8 @@ var _Header = require('./components/header/Header');
 
 var _Home = require('./components/home/Home');
 
+var _Single = require('./components/single/Single');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -98,7 +100,7 @@ var App = _wrapComponent('App')(function (_React$Component) {
 
       var menu = _react3.default.createElement(_Menu2.default, { onItemSelected: this.onMenuItemSelected, __source: {
           fileName: _jsxFileName,
-          lineNumber: 40
+          lineNumber: 41
         }
       });
       return _react3.default.createElement(
@@ -111,25 +113,25 @@ var App = _wrapComponent('App')(function (_React$Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 42
+            lineNumber: 43
           }
         },
         _react3.default.createElement(
           _reactNative.View,
           { style: styles.container, __source: {
               fileName: _jsxFileName,
-              lineNumber: 47
+              lineNumber: 48
             }
           },
           _react3.default.createElement(_Header.Header, { toggleMenu: this.toggle, __source: {
               fileName: _jsxFileName,
-              lineNumber: 48
+              lineNumber: 49
             }
           }),
-          _react3.default.createElement(_Home.Home, {
+          _react3.default.createElement(_Single.Single, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 49
+              lineNumber: 50
             }
           })
         )
@@ -145,6 +147,7 @@ exports.default = App;
 
 var styles = _reactNative.StyleSheet.create({
   container: {
-    marginTop: 25
+    marginTop: 25,
+    backgroundColor: '#fff'
   }
 });

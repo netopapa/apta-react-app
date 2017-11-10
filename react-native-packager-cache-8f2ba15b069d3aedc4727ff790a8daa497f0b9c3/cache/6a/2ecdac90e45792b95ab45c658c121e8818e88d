@@ -84,16 +84,17 @@ var Home = exports.Home = _wrapComponent('Home')(function (_React$Component) {
         value: function render() {
             return _react3.default.createElement(
                 _reactNative.View,
-                { style: styles.background, __source: {
+                {
+                    __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 26
+                        lineNumber: 28
                     }
                 },
                 _react3.default.createElement(
                     _nachosUi.H3,
                     { align: 'center', style: styles.black, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 27
+                            lineNumber: 29
                         }
                     },
                     'CURSOS'
@@ -107,13 +108,13 @@ var Home = exports.Home = _wrapComponent('Home')(function (_React$Component) {
                         var item = _ref.item;
                         return _react3.default.createElement(_Curso.Curso, { curso: item, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 33
+                                lineNumber: 35
                             }
                         });
                     },
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 28
+                        lineNumber: 30
                     }
                 })
             );
@@ -129,8 +130,5 @@ var styles = _reactNative.StyleSheet.create({
     },
     black: {
         color: '#000'
-    },
-    background: {
-        backgroundColor: '#fff'
     }
 });

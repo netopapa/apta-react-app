@@ -6,6 +6,7 @@ import Menu from './components/menu/Menu';
 //components
 import { Header } from './components/header/Header';
 import { Home } from './components/home/Home';
+import { Single } from './components/single/Single';
 
 export default class App extends React.Component {
 
@@ -46,7 +47,7 @@ export default class App extends React.Component {
       >
       <View style={styles.container}>
         <Header toggleMenu={this.toggle} ></Header>
-        <Home></Home>
+        <Single></Single>
       </View>
       </SideMenu>
     );
@@ -55,6 +56,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25
+    marginTop: 25,
+    backgroundColor: '#fff',
   },
 });
