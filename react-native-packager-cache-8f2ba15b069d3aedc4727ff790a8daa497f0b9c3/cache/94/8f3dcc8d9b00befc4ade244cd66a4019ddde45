@@ -128,7 +128,7 @@ var App = _wrapComponent('App')(function (_React$Component) {
               lineNumber: 49
             }
           }),
-          _react3.default.createElement(_Single.Single, {
+          _react3.default.createElement(_Home.Home, {
             __source: {
               fileName: _jsxFileName,
               lineNumber: 50

@@ -4,7 +4,7 @@ import { URL_API } from '../config/constants';
 export const getAllCursos = () => {
     return fetch(URL_API)
     .then(resp => resp.json())
-    .then(json => {return  json[0]});
+    .then(json => {return json});
 }
 
 export function getCurso(id){

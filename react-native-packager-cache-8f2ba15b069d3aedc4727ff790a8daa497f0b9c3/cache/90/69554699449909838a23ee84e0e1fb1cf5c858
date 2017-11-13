@@ -85,41 +85,43 @@ var Single = exports.Single = _wrapComponent('Single')(function (_React$Componen
             var curso = this.state.curso;
 
             var foto = _constants.URL_IMG + curso.foto;
-            var dt_inicio = curso.dt_inicio.split('-').reverse().join('/');
-            var dt_fim = curso.dt_fim.split('-').reverse().join('/');
             return _react3.default.createElement(
                 _reactNative.ScrollView,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 30
+                        lineNumber: 28
                     }
                 },
                 _react3.default.createElement(
                     _nachosUi.H3,
                     { align: 'center', style: styles.black, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 31
+                            lineNumber: 29
                         }
                     },
                     curso.nome
                 ),
-                _react3.default.createElement(_reactNative.Image, { source: { uri: foto }, style: styles.fotoCurso, __source: {
+                _react3.default.createElement(_nachosUi.Carousel, {
+                    images: [foto, 'https://placehold.it/300/59C480', foto],
+                    width: _constants.DEVICE_WIDTH,
+                    height: _constants.DEVICE_WIDTH / 1.8,
+                    __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 33
+                        lineNumber: 31
                     }
                 }),
                 _react3.default.createElement(
                     _reactNative.View,
                     { style: styles.informacoes, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 35
+                            lineNumber: 41
                         }
                     },
                     _react3.default.createElement(
                         _nachosUi.H4,
                         { style: styles.black, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 36
+                                lineNumber: 42
                             }
                         },
                         'DESCRI\xC7\xC3O'
@@ -129,7 +131,7 @@ var Single = exports.Single = _wrapComponent('Single')(function (_React$Componen
                         {
                             __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 37
+                                lineNumber: 43
                             }
                         },
                         curso.obs
@@ -138,7 +140,7 @@ var Single = exports.Single = _wrapComponent('Single')(function (_React$Componen
                         _reactNative.View,
                         { style: styles.datas, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 39
+                                lineNumber: 45
                             }
                         },
                         _react3.default.createElement(
@@ -146,14 +148,14 @@ var Single = exports.Single = _wrapComponent('Single')(function (_React$Componen
                             {
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 40
+                                    lineNumber: 46
                                 }
                             },
                             _react3.default.createElement(
                                 _nachosUi.H4,
                                 { align: 'center', style: styles.black, __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 41
+                                        lineNumber: 47
                                     }
                                 },
                                 'INICIA'
@@ -163,15 +165,15 @@ var Single = exports.Single = _wrapComponent('Single')(function (_React$Componen
                                 {
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 42
+                                        lineNumber: 48
                                     }
                                 },
-                                dt_inicio
+                                curso.dt_inicio
                             )
                         ),
                         _react3.default.createElement(_reactNative.View, { style: styles.leftBorder, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 44
+                                lineNumber: 50
                             }
                         }),
                         _react3.default.createElement(
@@ -179,14 +181,14 @@ var Single = exports.Single = _wrapComponent('Single')(function (_React$Componen
                             {
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 45
+                                    lineNumber: 51
                                 }
                             },
                             _react3.default.createElement(
                                 _nachosUi.H4,
                                 { align: 'center', style: styles.black, __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 46
+                                        lineNumber: 52
                                     }
                                 },
                                 'TERMINA'
@@ -196,12 +198,31 @@ var Single = exports.Single = _wrapComponent('Single')(function (_React$Componen
                                 {
                                     __source: {
                                         fileName: _jsxFileName,
-                                        lineNumber: 47
+                                        lineNumber: 53
                                     }
                                 },
-                                dt_fim
+                                curso.dt_fim
                             )
                         )
+                    ),
+                    _react3.default.createElement(
+                        _reactNative.View,
+                        { style: styles.btnIncricao, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 57
+                            }
+                        },
+                        _react3.default.createElement(_reactNative.Button, {
+                            title: 'INSCRI\xC7\xC3O',
+                            color: '#b71c1c',
+                            onPress: function onPress() {
+                                return console.warn('inscrição');
+                            },
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 58
+                            }
+                        })
                     )
                 )
             );
@@ -218,10 +239,6 @@ var styles = _reactNative.StyleSheet.create({
     black: {
         color: '#000'
     },
-    fotoCurso: {
-        width: _constants.DEVICE_WIDTH,
-        height: _constants.DEVICE_WIDTH / 1.8
-    },
     informacoes: {
         padding: 10
     },
@@ -231,5 +248,10 @@ var styles = _reactNative.StyleSheet.create({
     },
     leftBorder: {
         borderRightWidth: 1
+    },
+    btnIncricao: {
+        width: _constants.DEVICE_WIDTH / 2,
+        marginTop: 30,
+        marginLeft: _constants.DEVICE_WIDTH / 4 - 10
     }
 });

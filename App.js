@@ -47,7 +47,7 @@ export default class App extends React.Component {
       >
       <View style={styles.container}>
         <Header toggleMenu={this.toggle} ></Header>
-        <Single></Single>
+        <Home></Home>
       </View>
       </SideMenu>
     );

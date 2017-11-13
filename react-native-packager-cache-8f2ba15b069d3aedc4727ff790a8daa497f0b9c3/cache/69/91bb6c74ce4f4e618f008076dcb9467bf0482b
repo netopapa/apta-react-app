@@ -16,7 +16,7 @@ var getAllCursos = exports.getAllCursos = function getAllCursos() {
     return fetch(_constants.URL_API).then(function (resp) {
         return resp.json();
     }).then(function (json) {
-        return json[0];
+        return json;
     });
 };
 
